@@ -299,8 +299,87 @@ class Solution21(object):
         return head.next
 
 
-r = Solution21().mergeTwoLists(ListNode(1), ListNode(2))
+r = Solution21().mergeTwoLists(ListNode(None), ListNode(2))
 print r.val
+
+
+class Solution22(object):  #Todo,
+
+    def generateParenthesis(self, n):
+        ans = []
+        def _generate(cur, left, right):
+            if left > right:
+                return
+            if left == 0 and right == 0:
+                ans.append(cur)
+                return
+
+            if left > 0:
+                _generate(cur + '(', left - 1, right)
+
+            if right > 0:
+                _generate(cur + ')', left, right - 1)
+        _generate('', n, n)
+        return ans
+print Solution22().generateParenthesis(3)
+
+
+class Solution23(object):
+    def merge(self, l1, l2):
+        current= ListNode(None)
+        head = current
+        while l1 and l2:
+            if l1.val <= l2.val:
+                current.next = l1
+                current, l1 = current.next, l1.next
+            else:
+                current.next = l2
+                current, l2 = current.next, l2.next
+        if not l1 and not l2:
+            pass
+        elif not l1:
+            current.next = l2
+        else:
+            current.next = l1
+        return head.next
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        if len(lists) == 0:
+            return None
+        if len(lists) == 1:
+            return lists[0]
+        mid = len(lists)/2
+        left = self.mergeKLists(lists[:mid])
+        right = self.mergeKLists(lists[mid:])
+        return self.merge(right, left)
+
+r = Solution23().mergeKLists([ListNode(None), ListNode(1)])
+print r
+
+
+class Solution24(object):
+    def swapPairs(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head:
+            return []
+        node = head
+        while node and node.next:
+            node.val, node.next.val = node.next.val, node.val
+            node = node.next.next
+        return head
+
+node1 = ListNode(1)
+node2 = ListNode(2)
+node1.next = node2
+r = Solution24().swapPairs(node1)
+print r
+
 
 
 class Solution28(object):
