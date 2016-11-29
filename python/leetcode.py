@@ -366,20 +366,57 @@ class Solution24(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        if not head:
-            return []
-        node = head
-        while node and node.next:
-            node.val, node.next.val = node.next.val, node.val
+        node, node.next = self, head
+        while node.next and node.next.next:
+            node.next, node.next.next, node.next.next.next = node.next.next, node.next, node.next.next.next
             node = node.next.next
-        return head
+        return self.next
 
 node1 = ListNode(1)
-node2 = ListNode(2)
-node1.next = node2
+node3 = ListNode(3)
+node3.next = ListNode(4)
+node1.next = ListNode(2)
+node1.next.next = node3
 r = Solution24().swapPairs(node1)
 print r
 
+
+class Solution26(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) < 2:
+            return len(nums)
+        else:
+            index = 0
+            for i in range(1, len(nums)):
+                if nums[i] != nums[index]:
+                    index += 1
+                    nums[index] = nums[i]
+        return index+1
+
+print Solution26().removeDuplicates([1,1, 1])
+
+
+class Solution27(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        if len(nums) < 1:
+            return len(nums)
+        index = -1
+        for i in range(len(nums)):
+            if nums[i] != val:
+                index += 1
+                nums[index] = nums[i]
+        return index+1
+
+print Solution27().removeElement([2,2], 2)
 
 
 class Solution28(object):
@@ -398,3 +435,14 @@ class Solution28(object):
         return -1
 
 print Solution28().strStr("", "")
+
+
+class Solution(object):
+    def divide(self, dividend, divisor):
+        """
+        :type dividend: int
+        :type divisor: int
+        :rtype: int
+        """
+
+
