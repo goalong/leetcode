@@ -437,12 +437,48 @@ class Solution28(object):
 print Solution28().strStr("", "")
 
 
-class Solution(object):
+class Solution29(object): #TimeLimit Error
     def divide(self, dividend, divisor):
         """
         :type dividend: int
         :type divisor: int
         :rtype: int
         """
+        if (dividend >0 and divisor >0) or (divisor <0 and dividend<0):
+            flag = True
+        else:
+            flag = False
+        left, div = abs(dividend), abs(divisor)
+        pow = 1
+        ans = 0
+        while left >= div:
+            left -= div
+            ans += pow
+            div += div
+            pow += pow
+            if left < div:
+                div = abs(divisor)
+                pow = 1
+        return ans if flag else -ans
+print Solution29().divide(-1999, -2)
 
 
+class Solution31(object):
+    def nextPermutation(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        if len(nums)<2:
+            return None
+        i = len(nums) - 1
+        while nums[i] <= nums[i - 1] and i > 0:
+            i -= 1
+        index = i - 1
+        for j in range(len(nums) - 1, -1, -1):
+            if nums[j] > nums[index]:
+                nums[j], nums[index] = nums[index], nums[j]
+                nums[index + 1:] = sorted(nums[index + 1:])
+                return
+
+print Solution31().nextPermutation([5,1,1])
