@@ -514,3 +514,29 @@ class Solution34(object):
         else:
             return [start + 1, end - 1]
 
+
+class Solution35(object):
+    def searchInsert(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        low, high = 0, len(nums) - 1
+        while low <= high:
+            mid = (low + high) / 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                high = mid - 1
+            else:
+                low = mid + 1
+        if nums[mid] > target:
+            return mid
+        elif nums[mid] < target:
+            return mid+1
+
+
+print Solution35().searchInsert([1,2,3,6], 4)
+
+
