@@ -482,3 +482,35 @@ class Solution31(object):
                 return
 
 print Solution31().nextPermutation([5,1,1])
+
+
+class Solution34(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        low = 0
+        high = len(nums)-1
+        mid = (low+high)/2
+        while low <= high:
+            mid = (low+high)/2
+            if nums[mid] > target:
+                high = mid - 1
+            elif nums[mid] < target:
+                low = mid + 1
+            else:
+                break
+        if low > high:
+            return [-1, -1]
+        start = end = mid
+        while start >= 0 and nums[start] == target:
+            start -= 1
+        while end < len(nums) and nums[end] == target:
+            end += 1
+        if end - 1 == 0:
+            return [start + 1, 0]
+        else:
+            return [start + 1, end - 1]
+
