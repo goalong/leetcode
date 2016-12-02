@@ -540,3 +540,34 @@ class Solution35(object):
 print Solution35().searchInsert([1,2,3,6], 4)
 
 
+class Solution38(object):  #Todo too slow, only beat 13%
+    """这道题的描述不太清晰，test case的意思是以1为起始的第n个，表达的却是以n为起始的第n个，damn"""
+    def countAndSay(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        index = 1
+        rs = "1"
+        while index < n:
+            rs = self._helper(rs)
+            index += 1
+        return rs
+
+    def _helper(self, n):
+        n = n + "$"
+        i = 1
+        times = 1
+        rs = ''
+
+        while i < len(n) and i >=1:
+            if n[i-1] == n[i]:
+                times += 1
+            else:
+                rs += '%d%s' % (times, n[i-1])
+                times = 1
+            i += 1
+        return rs
+
+print Solution38().countAndSay(2)
+
