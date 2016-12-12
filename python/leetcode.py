@@ -571,3 +571,28 @@ class Solution38(object):  #Todo too slow, only beat 13%
 
 print Solution38().countAndSay(2)
 
+
+
+class Solution39(object):   # from others
+
+    def combinationSum(self, candidates, target):
+        res = []
+        candidates.sort()
+        self.dfs(candidates, target, 0, [], res)
+        return res
+
+    def dfs(self, nums, remain, index, path, res):
+        print("remain: %d, index: %d, path: %s, res: %s" % (remain, index, path , res))
+        if remain < 0:
+            return  # backtracking
+        if remain == 0:
+            res.append(path)
+            return
+        for i in xrange(index, len(nums)):
+            if nums[i] > remain:
+                break
+            self.dfs(nums, remain - nums[i], i, path + [nums[i]], res)
+
+print Solution39().combinationSum([2, 3, 6, 7], 7)
+
+
