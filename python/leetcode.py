@@ -593,6 +593,47 @@ class Solution39(object):   # from others
                 break
             self.dfs(nums, remain - nums[i], i, path + [nums[i]], res)
 
-print Solution39().combinationSum([2, 3, 6, 7], 7)
+class Solution40(object):
+    def combinationSum2(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        rs = []
+        candidates.sort()
+        self.dfs(candidates, target, 0, [], rs)
+        return rs
+
+    def dfs(self, nums, remain, index, path, rs):
+        if remain < 0:
+            return
+        if remain == 0:
+            rs.append(path)
+            return
+        for i in xrange(index, len(nums)):
+            if nums[i] > remain:
+                break
+            if i-1>=index and nums[i] == nums[i-1]:
+                continue
+            self.dfs(nums, remain - nums[i], i+1, path + [nums[i]], rs)
+    def combinationSum3(self, candidates, target):
+        result = []
+        def dfs(target, beg, ares, candidates):
+            if target == 0:
+                result.append(ares)
+                return
+            for i in xrange(beg, len(candidates)):
+                if candidates[i] > target: break
+                if i - 1 >= beg and candidates[i] == candidates[i - 1]:
+                    continue
+                dfs(target - candidates[i], i + 1, ares + [candidates[i]], candidates)
+
+        candidates.sort()
+        dfs(target, 0, [], candidates)
+        return result
+
+print "la"
+print Solution40().combinationSum2([10,1,2,7,6,1,5, 2,4, 2, 2], 8)
 
 
