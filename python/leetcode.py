@@ -593,7 +593,7 @@ class Solution39(object):   # from others
                 break
             self.dfs(nums, remain - nums[i], i, path + [nums[i]], res)
 
-class Solution40(object):
+class Solution40(object):  #from others solution
     def combinationSum2(self, candidates, target):
         """
         :type candidates: List[int]
@@ -614,7 +614,7 @@ class Solution40(object):
         for i in xrange(index, len(nums)):
             if nums[i] > remain:
                 break
-            if i-1>=index and nums[i] == nums[i-1]:
+            if i-1>=index and nums[i] == nums[i-1]: #why ????
                 continue
             self.dfs(nums, remain - nums[i], i+1, path + [nums[i]], rs)
     def combinationSum3(self, candidates, target):
@@ -635,5 +635,15 @@ class Solution40(object):
 
 print "la"
 print Solution40().combinationSum2([10,1,2,7,6,1,5, 2,4, 2, 2], 8)
+
+
+class Solution46(object):  #from others
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        return [[n] + p for i,n in enumerate(nums) for p in self.permute(nums[:i]+nums[i+1:])] or [[]]
+print Solution46().permute([1,2,3])
 
 
