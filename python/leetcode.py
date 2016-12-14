@@ -644,6 +644,22 @@ class Solution46(object):  #from others
         :rtype: List[List[int]]
         """
         return [[n] + p for i,n in enumerate(nums) for p in self.permute(nums[:i]+nums[i+1:])] or [[]]
-print Solution46().permute([1,2,3])
+print Solution46().permute([1,1, 2])
+
+
+class Solution47(object):    #from others
+    def permuteUnique(self, nums):
+        ans = [[]]
+        for n in nums:
+            new_ans = []
+            for l in ans:
+                for i in xrange(len(l) + 1):
+                    new_ans.append(l[:i] + [n] + l[i:])
+                    if i < len(l) and l[i] == n:     #confuse ???
+                        break  # handles duplication
+            ans = new_ans
+        return ans
+print Solution47().permuteUnique([1,1, 2,3])
+
 
 
