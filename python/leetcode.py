@@ -678,6 +678,21 @@ class Solution48(object):
 print Solution48().rotate([[1,2,3], [4,5,6], [7,8,9]])
 
 
+class Solution49(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        memo = {}
+        for s in strs:
+            s_sorted = "".join(sorted(s))
+            if s_sorted in memo:
+                memo[s_sorted].append(s)
+            else:
+                memo[s_sorted] = [s]
+        return memo.values()
 
+print Solution49().groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
 
 
