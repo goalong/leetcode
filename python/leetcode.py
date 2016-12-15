@@ -662,4 +662,22 @@ class Solution47(object):    #from others
 print Solution47().permuteUnique([1,1, 2,3])
 
 
+class Solution48(object):
+    def rotate(self, matrix):  # from https://discuss.leetcode.com/topic/6796/a-common-method-to-rotate-the-image
+        """
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
+        """
+        matrix.reverse()
+        for i in xrange(len(matrix)):
+            for j in xrange(i):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+        print matrix
+
+print Solution48().rotate([[1,2,3], [4,5,6], [7,8,9]])
+
+
+
+
 
