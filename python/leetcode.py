@@ -696,3 +696,67 @@ class Solution49(object):
 print Solution49().groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
 
 
+
+class Solution50(object):
+    def myPow(self, x, n):
+        """
+        :type x: float
+        :type n: int
+        :rtype: float
+        """
+        positive = (n > 0)
+        n = abs(n)
+
+        def helper(x, n):
+            if n == 0:
+                return 1
+            if n == 1:
+                return x
+            if n > 1:
+                if n % 2 == 1:
+                    return helper(x * x, n / 2) * x
+                else:
+                    return helper(x * x, n / 2)
+
+        rs = helper(x, n)
+        return rs if positive else 1 / rs
+
+
+print Solution50().myPow(1.001, 50)
+
+
+class Solution53(object):
+    def maxSubArray(self, nums):    #Time Limit Error
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        j, i = 0, 0
+        max = nums[0]
+        while i < len(nums):
+            t_sum = sum(nums[j:i + 1])
+            temp = j
+            while temp < i+1:
+                temp_sum = sum(nums[temp:i+1])
+                if temp_sum > t_sum:
+                    t_sum = temp_sum
+                temp += 1
+            if t_sum > max:
+                max = t_sum
+            i += 1
+        return max
+
+    def maxSubArray2(self, nums):   # from others
+        rs, current_sum = nums[0], 0
+        for i in nums:
+            current_sum += i
+            rs, current_sum = max(rs, current_sum), max(0, current_sum)
+        return rs
+
+print Solution53().maxSubArray2([-2,1,-3,4,-1,2,1,-5,4])
+
+
+
+
+
+
