@@ -756,7 +756,28 @@ class Solution53(object):
 print Solution53().maxSubArray2([-2,1,-3,4,-1,2,1,-5,4])
 
 
+class Solution54(object):
+    def spiralOrder(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[int]
+        """
+        rs = []
+        while matrix:
+            rs += matrix.pop(0)
+            if matrix and matrix[0]:
+                for row in matrix:
+                    rs.append(row.pop())
+            if matrix and matrix[0]:
+                rs += matrix.pop()[::-1]
+            if matrix and matrix[0]:
+                for row in matrix[::-1]:
+                    rs.append(row.pop(0))
+        return rs
 
+
+print Solution54().spiralOrder(
+    [[7], [9], [6]])
 
 
 
