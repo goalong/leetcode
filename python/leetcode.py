@@ -781,3 +781,21 @@ print Solution54().spiralOrder(
 
 
 
+class Solution55(object):
+    def canJump(self, nums):    # from others
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        m = 0
+        for i, n in enumerate(nums):
+            if i > m:  # 前面的i-1个位置最远只能跳到第i－1位，后面的都无法到达了
+                return False
+            m = max(m, i + n)
+        return True
+
+
+
+
+print Solution55().canJump([3,2,1,0,4])
+
