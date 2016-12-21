@@ -799,3 +799,20 @@ class Solution55(object):
 
 print Solution55().canJump([3,2,1,0,4])
 
+
+
+class Solution56(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[Interval]
+        :rtype: List[Interval]
+        """
+        rs = []
+        intervals.sort(key=lambda x: x.start)
+        for i in intervals:
+            if not rs or i.start > rs[-1].end:
+                rs.append(i)
+            elif i.end > rs[-1].end:
+                rs[-1].end = i.end
+        return rs
+
