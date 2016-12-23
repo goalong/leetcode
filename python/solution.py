@@ -816,3 +816,59 @@ class Solution56(object):
                 rs[-1].end = i.end
         return rs
 
+class Interval(object):
+    def __init__(self, s=0, e=0):
+        self.start = s
+        self.end = e
+
+
+class Solution57(object):
+    def insert(self, intervals, newInterval):    #original, slow and stupid
+        """
+        :type intervals: List[Interval]
+        :type newInterval: Interval
+        :rtype: List[Interval]
+        """
+        rs = [newInterval]
+        if not intervals:
+            return rs
+        for interval in intervals:
+            if interval.end < rs[-1].start:  # [(1,5)] (6,8)
+                rs.insert(-1, interval)
+            elif interval.start <= rs[-1].start <= rs[-1].end <= interval.end:  # 1, 7 (2,3)
+                rs[-1] = interval
+            elif rs[-1].start <= interval.start <= interval.end <= rs[-1].end:  # 1, 5 (0,6)
+                pass
+            elif newInterval.end > interval.end >= newInterval.start >= interval.start:  # 1,5  (2, 8)
+                rs[-1].start = interval.start
+            elif interval.end >= rs[-1].end >= interval.start >= rs[-1].start:    # 3, 5 6, 9    4, 7
+                rs[-1].end = interval.end
+            elif interval.start > rs[-1].end:  #5,8  1,3
+                rs.append(interval)
+        return rs
+
+    def insert2(self, intervals, newInterval):    # can't pass, Interval not Implement, leetcode bug
+        left = [i for i in intervals if i.end < newInterval.start]
+        right = [i for i in intervals if i.start > newInterval.end]
+        if not left + right == intervals:
+            start = min(intervals[len(left)].start, newInterval.start)
+            end = max(intervals[~len(right)].end, newInterval.end)
+            return left + [Interval(start, end)] + right
+        return left + right
+
+print Solution57().insert([Interval(0,10)], Interval(2,2))
+
+
+class Solution58(object):
+    def lengthOfLastWord(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        str_list = s.split()
+        return 0 if not str_list else len(str_list[-1])
+
+print Solution58().lengthOfLastWord("a ")
+
+
+
