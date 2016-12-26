@@ -871,4 +871,30 @@ class Solution58(object):
 print Solution58().lengthOfLastWord("a ")
 
 
+class Solution59(object):
+    def generateMatrix(self, n):   # from https://discuss.leetcode.com/topic/19130/4-9-lines-python-solutions
+        """
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        rs = []
+        low = n*n + 1
+        while low > 1:
+            low, high = low - len(rs), low
+            rs = [range(low, high)] + zip(*rs[::-1])
+        return rs
+
+    def generateMatrix2(self, n):
+        rs = [[0 for a in range(n)] for b in range(n)]
+        positions = [[(i, j) for j in range(n)] for i in range(n)]
+        num = 1
+        while positions:
+            first_row = positions.pop(0)
+            for x,y in first_row:
+                print x,y, num
+                rs[x][y] = num
+                num += 1
+            positions = zip(*positions)[::-1]
+        return rs
+print Solution59().generateMatrix2(3)
 
