@@ -898,3 +898,28 @@ class Solution59(object):
         return rs
 print Solution59().generateMatrix2(3)
 
+
+class Solution61(object):
+    def rotateRight(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        if k == 0 or not head:
+            return head
+        len = 0
+        n = lastNode = head
+        while n:
+            len += 1
+            lastNode = n
+            n = n.next
+        if k % len == 0:
+            return head
+        newHead = newTail = head
+        for i in range((len - k) % len):
+            newTail = newHead
+            newHead = newHead.next
+        lastNode.next = head
+        newTail.next = None
+        return newHead
