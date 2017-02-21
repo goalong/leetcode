@@ -898,3 +898,45 @@ class Solution59(object):
         return rs
 print Solution59().generateMatrix2(3)
 
+
+class Solution60(object):
+    def getPermutation(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: str
+        """
+        from math import factorial
+        origin = range(1, n+1)
+        rs = []
+        extra = k
+        i = 1
+        while i < n -1:
+            index = extra // factorial(n-i)
+            extra = extra % factorial(n-i)
+            index = index -1 if extra == 0 else index
+            rs.append(origin.pop(index))
+            i+=1
+        if extra == 1:
+            rs.extend(origin)
+        else:
+            rs.extend(origin[::-1])
+        return ''.join(str(e) for e in rs)
+
+        # first = k // factorial(n-1) # index of first element in origin
+        # extra = k % factorial(n-1)
+        #
+        # rs.append(origin.pop(first))
+        #
+        #
+        # second = extra // factorial(n-2) # index of second element in origin
+        # rs.append(origin.pop(second))
+        #
+        # extra = extra % factorial(n-2)
+        #
+        #
+        # third = extra // factorial(n-3)
+        # rs.append(origin.pop(third))
+
+print(Solution60().getPermutation(3, 6))
+
