@@ -912,8 +912,9 @@ class Solution60(object):
         extra = k
         i = 1
         while i < n -1:
-            index = extra // factorial(n-i)
-            extra = extra % factorial(n-i)
+            fact = factorial(n - i)
+            index = extra // fact
+            extra = extra % fact
             index = index -1 if extra == 0 else index
             rs.append(origin.pop(index))
             i+=1
@@ -964,3 +965,20 @@ class Solution61(object):
         lastNode.next = head
         newTail.next = None
         return newHead
+
+
+class Solution62(object):
+    def uniquePaths(self, m, n):
+        """
+        :type m: int
+        :type n: int
+        :rtype: int
+        """
+        rs = [[1] * n for x in range(m)]
+        for x in range(1,m):
+            for y in range(1, n):
+                rs[x][y] = rs[x-1][y] + rs[x][y-1]
+        return rs[m-1][n-1]
+
+print(Solution62().uniquePaths(2, 2))
+
