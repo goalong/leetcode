@@ -1093,3 +1093,25 @@ class Solution67(object):
 
 print(Solution67().addBinary("1111", "1111"))
 
+
+class Solution69(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        if x == 0 or x == 1:
+            return x
+        left, right = 0, x
+        while left <= right:
+            mid = (left+right)//2
+            if mid**2 <= x <(mid+1)**2:
+                return mid
+            elif mid**2 < x:
+                left = mid + 1
+            else:
+                right = mid -1
+
+
+print(Solution69().mySqrt(1695165231))
+
