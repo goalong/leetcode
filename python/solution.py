@@ -1115,3 +1115,20 @@ class Solution69(object):
 
 print(Solution69().mySqrt(1695165231))
 
+
+class Solution70(object):
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        rs = [1 for _ in range(n)]
+        rs[1] = 2
+        if n < 2:
+            return rs[n-1]
+        for i in range(2, n):
+            rs[i] = rs[i-1] + rs[i-2]
+        return rs[n-1]
+
+print(Solution70().climbStairs(4))
+
