@@ -1132,3 +1132,26 @@ class Solution70(object):
 
 print(Solution70().climbStairs(4))
 
+
+class Solution71(object):
+    def simplifyPath(self, path):
+        """
+        :type path: str
+        :rtype: str
+        """
+        path_list = path.split("/")
+        path_list = [i for i in path_list if i not in ("", ".")]
+        rs = []
+        double_dot_count = 0
+        while path_list:
+            cur_last = path_list.pop()
+            if cur_last == "..":
+                double_dot_count += 1
+            else:
+                if double_dot_count > 0:
+                    double_dot_count -= 1
+                else:
+                    rs.append(cur_last)
+        return "/" + "/".join(rs[::-1])
+
+print(Solution71().simplifyPath("/home/foo/.ssh/../.ssh2/authorized_keys/"))
