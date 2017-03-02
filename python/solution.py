@@ -1063,3 +1063,33 @@ class Solution66(object):
 
 print(Solution66().plusOne([9,9]))
 
+
+class Solution67(object):
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        rs = []
+        extra = 0
+        list_a, list_b = list(a), list(b)
+        while list_a or list_b:
+            last_a = list_a.pop() if list_a else 0
+            last_b = list_b.pop() if list_b else 0
+            item = int(last_a) + int(last_b) + extra
+            if item == 2:
+                rs.append(0)
+                extra = 1
+            elif item == 3:
+                rs.append(1)
+                extra = 1
+            else:
+                rs.append(item)
+                extra = 0
+        if extra == 1:
+            rs.append(1)
+        return "".join([str(i) for i in rs[::-1]])
+
+print(Solution67().addBinary("1111", "1111"))
+
