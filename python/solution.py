@@ -1007,3 +1007,36 @@ class Solution63(object):
                     rs[x][y] = rs[x - 1][y] + rs[x][y - 1]
         return rs[m - 1][n - 1]
 
+print(Solution63().uniquePathsWithObstacles([
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0]
+]))
+
+
+
+
+class Solution64(object):
+    def minPathSum(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """
+        m = len(grid)
+        n = len(grid[0])
+        rs = grid
+        for i in range(1,m):
+            rs[i][0] += rs[i-1][0]  #边线上的位置的最小sum等于该位置的值加前一个位置的最小sum
+
+        for j in range(1,n):
+            rs[0][j] += rs[0][j-1]
+
+        for x in range(1,m):
+            for y in range(1, n):
+                rs[x][y] += min(rs[x-1][y], rs[x][y-1])  #该位置的最小sum等于该位置的值加左边和上边位置的最小sum中较小的一个
+        return rs[m-1][n-1]
+
+print(Solution64().minPathSum([[1,2,3], [1,1,1], [1,2,3]]))
+
+
+
