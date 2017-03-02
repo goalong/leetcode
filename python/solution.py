@@ -977,8 +977,33 @@ class Solution62(object):
         rs = [[1] * n for x in range(m)]
         for x in range(1,m):
             for y in range(1, n):
-                rs[x][y] = rs[x-1][y] + rs[x][y-1]
+                rs[x][y] = rs[x-1][y] + rs[x][y-1]  #每个位置的唯一路径等于它上边和左边位置的唯一路径的和
         return rs[m-1][n-1]
 
 print(Solution62().uniquePaths(2, 2))
+
+
+class Solution63(object):
+    def uniquePathsWithObstacles(self, obstacleGrid):
+        """
+        :type obstacleGrid: List[List[int]]
+        :rtype: int
+        """
+        m = len(obstacleGrid)
+        n = len(obstacleGrid[0])
+        rs = [[0] * n for x in range(m)]
+        for i in range(m):
+            if obstacleGrid[i][0]:
+                break
+            rs[i][0] = 1
+        for j in range(n):
+            if obstacleGrid[0][j]:
+                break
+            rs[0][j] = 1
+
+        for x in range(1, m):
+            for y in range(1, n):
+                if not obstacleGrid[x][y]:
+                    rs[x][y] = rs[x - 1][y] + rs[x][y - 1]
+        return rs[m - 1][n - 1]
 
