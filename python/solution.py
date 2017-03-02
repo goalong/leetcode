@@ -1039,4 +1039,27 @@ class Solution64(object):
 print(Solution64().minPathSum([[1,2,3], [1,1,1], [1,2,3]]))
 
 
+class Solution66(object):
+    def plusOne(self, digits):
+        """
+        :type digits: List[int]
+        :rtype: List[int]
+        """
+        rs = []
+        extra = 0
+        digits[-1] += 1
+        while digits:
+            cur_last = digits.pop()
+            item = cur_last + extra
+            if item > 9:
+                rs.append(0)
+                extra = 1
+            else:
+                rs.append(item)
+                extra = 0
+        if extra == 1:
+            rs.append(1)
+        return rs[::-1]
+
+print(Solution66().plusOne([9,9]))
 
