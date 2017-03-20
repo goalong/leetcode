@@ -1155,3 +1155,29 @@ class Solution71(object):
         return "/" + "/".join(rs[::-1])
 
 print(Solution71().simplifyPath("/home/foo/.ssh/../.ssh2/authorized_keys/"))
+
+
+
+class Solution73(object):
+    def setZeroes(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
+        """
+        column_num = len(matrix[0])
+        row_num = len(matrix)
+        column = [False for i in range(column_num)]
+        row = [False for j in range(row_num)]
+
+        for i in range(row_num):
+            for j in range(column_num):
+                if matrix[i][j] == 0:
+                    column[i] = row[j] = True
+
+        for i in range(row_num):
+            for j in range(column_num):
+                if row[i] or column[j]:
+                    matrix[i][j] = 0
+
+
+print(Solution73().setZeroes([[0,1]]))
