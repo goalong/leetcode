@@ -1181,3 +1181,37 @@ class Solution73(object):
 
 
 print(Solution73().setZeroes([[0,1]]))
+
+
+class Solution74(object):
+    def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        if matrix == [] or matrix == [[]]:
+            return False
+        column_num = len(matrix[0])
+        row_num = len(matrix)
+        if target < matrix[0][0] or target > matrix[-1][-1]:
+            return False
+        for i in range(row_num):
+            if target <= matrix[i][-1]:
+                break
+        high = column_num
+        low = 0
+        while low < high:
+            middle = (low + high) / 2
+            if target > matrix[i][middle]:
+                low = middle + 1
+            elif target < matrix[i][middle]:
+                high = middle
+            else:
+                return True
+        return False
+
+
+print(Solution74().searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,50]],  3
+))
+
