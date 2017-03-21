@@ -1215,3 +1215,22 @@ class Solution74(object):
 print(Solution74().searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,50]],  3
 ))
 
+
+class Solution75(object):
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        count = len(nums)
+        for i in range(1, count):   #插入排序
+            key = nums[i]
+            j = i - 1
+            while j >= 0:
+                if nums[j] > key:
+                    nums[j+1], nums[j] = nums[j], nums[j+1]
+                j -= 1
+
+print(Solution75().sortColors([10,23,1,53,654,54,16,646,65,3155,546,31]))
+
+
