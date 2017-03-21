@@ -1234,3 +1234,32 @@ class Solution75(object):
 print(Solution75().sortColors([10,23,1,53,654,54,16,646,65,3155,546,31]))
 
 
+class Solution77(object):
+    def combine(self, n, k):   #think
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        if k == 1:
+            return [[i + 1] for i in range(n)]
+        result = []
+        if n > k:
+            result = [r + [n] for r in self.combine(n - 1, k - 1)] + self.combine(n - 1, k)
+        else:
+            result = [r + [n] for r in self.combine(n - 1, k - 1)]
+        return result
+print(Solution77().combine(5, 3))
+
+
+class Solution78(object):
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        result = [[]]    # slow, beat 5%
+        for num in nums:
+            result += [origin + [num] for origin in result]
+        return result
+
